@@ -1,0 +1,66 @@
+/*
+SQLyog Ultimate v13.1.1 (64 bit)
+MySQL - 10.4.11-MariaDB : Database - dbclaro
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`dbclaro` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `dbclaro`;
+
+/*Table structure for table `rol` */
+
+DROP TABLE IF EXISTS `rol`;
+
+CREATE TABLE `rol` (
+  `id` int(1) NOT NULL,
+  `DETALLE` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `rol` */
+
+insert  into `rol`(`id`,`DETALLE`) values 
+(1,'USUARIO'),
+(2,'ADMIN');
+
+/*Table structure for table `usuario` */
+
+DROP TABLE IF EXISTS `usuario`;
+
+CREATE TABLE `usuario` (
+  `CODIGO` varchar(7) CHARACTER SET utf8mb4 NOT NULL,
+  `DNI` varchar(12) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `NOMBRES` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `APELLIDOS` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `FUNCION` varchar(70) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `ROL` int(1) DEFAULT NULL,
+  `PASSS` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
+  `imagen_url` varchar(255) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  PRIMARY KEY (`CODIGO`),
+  KEY `ROL` (`ROL`),
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`ROL`) REFERENCES `rol` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `usuario` */
+
+insert  into `usuario`(`CODIGO`,`DNI`,`NOMBRES`,`APELLIDOS`,`FUNCION`,`ROL`,`PASSS`,`imagen`,`imagen_url`,`fecha`) values 
+('333333','1234567','ANTHONY','PUENTE','ANALIST',1,'PE2012','RUTA','RUTITA','2020-01-26'),
+('C342312','45818902','CARLA ROMERO','ROMERO','ANALISTA DE SEGURIDAD 2',2,'$Peru2028',NULL,NULL,'2020-01-26'),
+('E751873','1234567','ANTHONY','PUENTE','ANALIST',1,'PE2012','RUTA','RUTITA','0000-00-00'),
+('E751877','45818901','ANTHONY ALEXANDRE','PUENTE OLANO','ANALISTA DE SEGURIDAD',1,'$Peru2028',NULL,NULL,'2020-01-26');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
